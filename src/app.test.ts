@@ -2,9 +2,32 @@ import request from 'supertest';
 import type { Express } from 'express';
 import { createApp } from './app';
 import { InMemoryTodoRepository } from './repository/in-memory-todo-repository';
+import type { TodoRepository } from './repository/todo-repository';
 
 function buildApp(): Express {
   return createApp(new InMemoryTodoRepository());
+}
+
+/** Repository whose every method throws, to exercise the error handler's generic 500 fallback. */
+class ThrowingTodoRepository implements TodoRepository {
+  private fail(): never {
+    throw new Error('boom');
+  }
+  findAll(): Promise<never> {
+    return this.fail();
+  }
+  findById(): Promise<never> {
+    return this.fail();
+  }
+  create(): Promise<never> {
+    return this.fail();
+  }
+  update(): Promise<never> {
+    return this.fail();
+  }
+  remove(): Promise<never> {
+    return this.fail();
+  }
 }
 
 async function createTodo(app: Express, body: Record<string, unknown> = { title: 'Buy milk' }) {
@@ -183,6 +206,19 @@ describe('Todos API', () => {
       const app = buildApp();
       const res = await request(app).delete('/todos/does-not-exist');
       expect(res.status).toBe(404);
+    });
+  });
+
+  describe('unexpected errors', () => {
+    it('returns a generic 500 for an error the app did not anticipate', async () => {
+      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => undefined);
+      const app = createApp(new ThrowingTodoRepository());
+
+      const res = await request(app).get('/todos');
+
+      expect(res.status).toBe(500);
+      expect(res.body.error.code).toBe('INTERNAL_ERROR');
+      consoleErrorSpy.mockRestore();
     });
   });
 });
