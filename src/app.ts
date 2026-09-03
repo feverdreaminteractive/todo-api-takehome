@@ -1,9 +1,11 @@
 import path from 'node:path';
 import express, { type Express } from 'express';
+import pinoHttp from 'pino-http';
 import type { TodoRepository } from './repository/todo-repository';
 import { TodoService } from './services/todo-service';
 import { createRoutes } from './http/routes';
 import { errorHandler } from './http/middleware/error-handler';
+import { logger } from './logger';
 
 // public/ sits one level up from this file whether running compiled
 // (dist/app.js) or via tsx in dev (src/app.ts) -- both resolve to the
@@ -17,8 +19,13 @@ const PUBLIC_DIR = path.join(__dirname, '..', 'public');
  */
 export function createApp(repository: TodoRepository): Express {
   const app = express();
+  app.use(pinoHttp({ logger }));
   app.use(express.json());
   app.use(express.static(PUBLIC_DIR));
+
+  app.get('/health', (_req, res) => {
+    res.status(200).json({ status: 'ok', uptime: process.uptime() });
+  });
 
   const service = new TodoService(repository);
   app.use(createRoutes(service));

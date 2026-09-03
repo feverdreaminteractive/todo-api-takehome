@@ -36,6 +36,17 @@ async function createTodo(app: Express, body: Record<string, unknown> = { title:
 }
 
 describe('Todos API', () => {
+  describe('GET /health', () => {
+    it('returns 200 with a status and uptime', async () => {
+      const app = buildApp();
+      const res = await request(app).get('/health');
+
+      expect(res.status).toBe(200);
+      expect(res.body.status).toBe('ok');
+      expect(typeof res.body.uptime).toBe('number');
+    });
+  });
+
   describe('POST /todos', () => {
     it('creates a todo and returns 201', async () => {
       const app = buildApp();
