@@ -17,6 +17,8 @@ and a mirrored Linear ticket.
   concern per PR, CI-checked
 - **[Linear](https://linear.app/feverdreaminteractive/team/FEV/all)** — the FEV team's full
   issue list; this project's tickets are cross-linked back to their GitHub issue counterparts
+- **[Live Preview Branch](https://feat-12-netlify--todolistonelive.netlify.app/)** — Preview of the final pull request of how the app will work once all the pull requests are merged.
+  
 
 ## What's being built
 
