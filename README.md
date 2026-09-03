@@ -15,6 +15,9 @@ and a mirrored Linear ticket.
   Extras
 - **[Pull requests](../../pulls)** — stacked (each based on the previous PR, not `main`), one
   concern per PR, CI-checked
+- **[Linear project](https://linear.app/feverdreaminteractive/project/to-do-api-take-home-a410cc5cb338)**
+  — the same breakdown as the GitHub issues, ticket-per-ticket, each cross-linked back to its
+  GitHub issue
 
 ## What's being built
 
