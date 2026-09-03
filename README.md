@@ -41,6 +41,14 @@ survive removing the container unless you mount a volume:
 docker run -p 3000:3000 -v "$(pwd)/data:/app/data" todo-api-takehome
 ```
 
+### Netlify preview
+
+Every branch/PR also gets a live Netlify deploy preview. That deployment specifically uses
+`InMemoryTodoRepository` instead of the file-based one — Netlify Functions don't reliably
+persist local file writes across invocations, and the assignment explicitly allows an in-memory
+store as a fallback. **Data there resets on cold start** — that's expected, not a bug. The
+actual submission (`npm start` / Docker) is unaffected and stays file-based.
+
 ## Running the tests
 
 ```sh
