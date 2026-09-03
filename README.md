@@ -1,5 +1,7 @@
 # To-Do API Take-Home
 
+[![CI](https://github.com/feverdreaminteractive/todo-api-takehome/actions/workflows/ci.yml/badge.svg)](https://github.com/feverdreaminteractive/todo-api-takehome/actions/workflows/ci.yml)
+
 A REST API to-do list app, built for a take-home skills assessment. TypeScript + Express, a
 layered/repository architecture, zod validation, and three tiers of automated tests.
 
