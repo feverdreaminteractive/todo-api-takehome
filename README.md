@@ -15,8 +15,8 @@ and a mirrored Linear ticket.
   Extras
 - **[Pull requests](../../pulls)** — stacked (each based on the previous PR, not `main`), one
   concern per PR, CI-checked
-- **[Linear](https://linear.app/feverdreaminteractive/team/FEV/all)** — the same breakdown as
-  the GitHub issues, ticket-per-ticket, each cross-linked back to its GitHub issue
+- **[Linear](https://linear.app/feverdreaminteractive/team/FEV/all)** — the FEV team's full
+  issue list; this project's tickets are cross-linked back to their GitHub issue counterparts
 
 ## What's being built
 
