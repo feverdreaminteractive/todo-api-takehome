@@ -61,3 +61,25 @@ npm run lint
 Full setup/testing/design-choice documentation (assumptions, trade-offs, API reference) lands
 with the README PR — check the [pull requests](../../pulls) above for where that currently
 stands.
+
+## Docker
+
+Build the image:
+
+```sh
+docker build -t todo-api-takehome .
+```
+
+Run it:
+
+```sh
+docker run -p 3000:3000 todo-api-takehome
+```
+
+The server is now reachable at `http://localhost:3000`. Data persists inside the container at
+`/app/data/todos.json` by default (overridable via the `DATA_FILE` env var) -- it will **not**
+survive removing the container unless you mount a volume:
+
+```sh
+docker run -p 3000:3000 -v "$(pwd)/data:/app/data" todo-api-takehome
+```
