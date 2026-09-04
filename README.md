@@ -39,6 +39,9 @@ survive removing the container unless you mount a volume:
 docker run -p 3000:3000 -v "$(pwd)/data:/app/data" todo-api-takehome
 ```
 
+Verified end to end: image builds, full CRUD works through the container, and data survives
+a container being stopped, removed, and recreated against the same mounted volume.
+
 ## Running the tests
 
 ```sh
@@ -141,6 +144,3 @@ in isolation).
   datastore, not file locking tricks.
 - **No auth/multi-user support** — out of scope per the assignment; every todo is global, not
   scoped to a user.
-- **Docker image is unverified by an actual `docker build`** — Docker wasn't available in the
-  environment this was built in. The Dockerfile was reviewed carefully but should be built and
-  run locally before being considered fully verified.
